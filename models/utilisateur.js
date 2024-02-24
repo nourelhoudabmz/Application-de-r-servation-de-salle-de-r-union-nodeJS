@@ -1,26 +1,60 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
-const utilisateurSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
+  fullname: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
-  motDePasse: {
+  password: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  avatar: String,
+  tokens: [{ type: Object }],
 });
+
 
 // Méthode pour hasher le mot de passe avant de sauvegarder l'utilisateur
-utilisateurSchema.pre('save', async function(next) {
-  if (this.isModified('motDePasse')) {
-    this.motDePasse = await bcrypt.hash(this.motDePasse, 8);
+
+userSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    bcrypt.hash(this.password, 8, (err, hash) => {
+      if (err) return next(err);
+
+      this.password = hash;
+      next();
+    });
   }
-  next();
 });
 
-const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema);
+userSchema.methods.comparePassword = async function (password) {
+  if (!password) throw new Error('Password is mission, can not compare!');
 
-module.exports = Utilisateur;
+  try {
+    const result = await bcrypt.compare(password, this.password);
+    return result;
+  } catch (error) {
+    console.log('Error while comparing password!', error.message);
+  }
+};
+
+userSchema.statics.isThisEmailInUse = async function (email) {
+  if (!email) throw new Error('Invalid Email');
+  try {
+    const user = await this.findOne({ email });
+    if (user) return false;
+
+    return true;
+  } catch (error) {
+    console.log('error inside isThisEmailInUse method', error.message);
+    return false;
+  }
+};
+
+module.exports = mongoose.model('User', userSchema);
