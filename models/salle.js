@@ -5,6 +5,9 @@ const salleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  photos: {
+    type: [String],
+  },
   capacite: {
     type: Number,
     required: true
@@ -14,12 +17,12 @@ const salleSchema = new mongoose.Schema({
   }],
   disponibilites: [{
     jour: {
-      type: Date,
+      type: String,
       required: true
     },
     plagesHoraires: [{
-      debut: Date,
-      fin: Date
+      debut: String,
+      fin: String
     }]
   }]
 });

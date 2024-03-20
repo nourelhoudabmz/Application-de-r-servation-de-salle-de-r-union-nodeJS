@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
   utilisateur: {
@@ -29,3 +29,4 @@ const reservationSchema = new mongoose.Schema({
 const Réservation = mongoose.model('Réservation', reservationSchema);
 
 module.exports = Réservation;
+*/

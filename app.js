@@ -1,18 +1,54 @@
 const express = require('express');
-require('dotenv').config();
-require('./models/db');
-const userRouter = require('./routes/user');
-
-const User = require('./models/user');
-
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const app = express();
-app.use(express.json());
-app.use(userRouter);
-// testing 
-// app.get('/', (req, res) => {
-//   res.json({ success: true, message: 'Welcome to backend zone!' });
-// });
 
-app.listen(8000,'192.168.1.9', () => {
-  console.log('port is listening');
-});
+const authRoute =require('./routes/auth')
+const usersRoute =require('./routes/users')
+const sallesRoute =require('./routes/salles')
+const reservationsRoute =require('./routes/reservations')
+
+
+
+dotenv.config()
+const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT || 5000
+
+
+//middlewares
+app.use(express.json());
+app.use("/auth",authRoute);
+app.use("/users",usersRoute);
+app.use("/salles",sallesRoute);
+app.use("/reservations",reservationsRoute);
+
+
+
+
+
+
+
+
+
+
+
+app.get("/users",(req,res)=>{
+  res.send("hello first response")
+}
+)
+
+
+
+
+
+// connection to mongodb and start server 
+mongoose.connect(MONGODB_URI).then(()=>{
+  console.log('connected to MongoDb');
+  app.listen(PORT,()=>{
+      console.log(`server listening on ${PORT}`)
+  })
+}).catch((err) =>{
+  console.error('Error connecting to mongodb:',err.message)
+})
+
+module.exports = app;
