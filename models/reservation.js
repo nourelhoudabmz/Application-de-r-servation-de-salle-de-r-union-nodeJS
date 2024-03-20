@@ -1,9 +1,9 @@
-/*const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
   utilisateur: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Utilisateur',
+    ref: 'User',
     required: true
   },
   salle: {
@@ -26,7 +26,6 @@ const reservationSchema = new mongoose.Schema({
   }
 });
 
-const Réservation = mongoose.model('Réservation', reservationSchema);
+const Reservation = mongoose.model('Reservation', reservationSchema);
 
-module.exports = Réservation;
-*/
+module.exports = Reservation;
