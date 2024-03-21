@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 5000
 
 //middlewares
 app.use(express.json());
+app.set('view engine', 'ejs');
 app.use("/auth",authRoute);
 app.use("/users",usersRoute);
 app.use("/salles",sallesRoute);
@@ -25,18 +26,10 @@ app.use("/reservations",reservationsRoute);
 
 
 
-
-
-
-
-
-
-
 app.get("/users",(req,res)=>{
   res.send("hello first response")
 }
 )
-
 
 
 
