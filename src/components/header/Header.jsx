@@ -1,5 +1,10 @@
 import {
+  faHome,
   faBed,
+  faDoorOpen,
+  faConciergeBell,
+  faTags,
+  faCalendarAlt,
   faCalendarDays,
   faCar,
   faPerson,
@@ -56,42 +61,41 @@ const Header = ({ type }) => {
       >
         <div className="headerList">
           <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
+            <FontAwesomeIcon icon={  faHome} />
+            <span>Acceuil</span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            <span>Reservation Salle</span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
+            <FontAwesomeIcon icon={faDoorOpen} />
+            <span>Type de Salle</span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
+            <FontAwesomeIcon icon={faConciergeBell} />
+            <span>Service </span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
+            <FontAwesomeIcon icon={ faTags} />
+            <span>Promotion</span>
           </div>
         </div>
         {type !== "list" && (
           <>
             <h1 className="headerTitle">
-              A lifetime of discounts? It's Genius.
+            Votre espace professionnel idéal vous attend.
             </h1>
             <p className="headerDesc">
-              Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
+            Découvrez et réservez la salle parfaite pour vos réunions et événements professionnels avec Lamabooking.
             </p>
-            <button className="headerBtn">Sign in / Register</button>
+            <button className="headerBtn">Réservez votre salle maintenant</button>
             <div className="headerSearch">
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faBed} className="headerIcon" />
+                <FontAwesomeIcon icon={faDoorOpen} className="headerIcon" />
                 <input
                   type="text"
-                  placeholder="Where are you going?"
+                  placeholder="Quel type de salle recherchez-vous ?"
                   className="headerSearchInput"
                   onChange={(e) => setDestination(e.target.value)}
                 />
@@ -121,7 +125,7 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
-                >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+                >{`${options.adult} participant · ${options.room} Type Salle`}</span>
                 {openOptions && (
                   <div className="options">
                     <div className="optionItem">
@@ -192,7 +196,7 @@ const Header = ({ type }) => {
               </div>
               <div className="headerSearchItem">
                 <button className="headerBtn" onClick={handleSearch}>
-                  Search
+                  Trouver Salle
                 </button>
               </div>
             </div>
