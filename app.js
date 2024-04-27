@@ -2,13 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = express();
-
+const cors=require("cors");
+const multer=require("multer");
 const authRoute =require('./routes/auth')
 const usersRoute =require('./routes/users')
 const sallesRoute =require('./routes/salles')
 const reservationsRoute =require('./routes/reservations')
-
-
 
 dotenv.config()
 const MONGODB_URI = process.env.MONGODB_URI
@@ -16,13 +15,15 @@ const PORT = process.env.PORT || 5000
 
 
 //middlewares
+
 app.use(express.json());
+app.use(cors());
 app.set('view engine', 'ejs');
+
 app.use("/auth",authRoute);
 app.use("/users",usersRoute);
 app.use("/salles",sallesRoute);
 app.use("/reservations",reservationsRoute);
-
 
 
 

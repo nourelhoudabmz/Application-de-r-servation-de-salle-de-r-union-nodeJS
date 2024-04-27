@@ -8,9 +8,13 @@ router.get('/', reservationController.getAllReservations);
 router.get('/:id', reservationController.getReservationById);
 router.put('/:id', reservationController.updateReservation);
 router.delete('/:id', reservationController.deleteReservation);
+//router.post('/add', reservationController.create);
+
 
 // Route pour créer une nouvelle réservation en vérifiant les conflits et en envoyant une notification par e-mail
 //router.post('/checkAndNotify', reservationController.ReserverReservation);
+
+
 
 
 
